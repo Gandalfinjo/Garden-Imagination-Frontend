@@ -1,0 +1,107 @@
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand">
+                <b>Garden Imagination</b>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="/owner" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="/owner-firms" class="nav-link">Firms</a></li>
+                <li class="nav-item"><a href="/owner-appointments" class="nav-link active">Appointments</a></li>
+                <li class="nav-item"><a href="/owner-maintenance" class="nav-link">Maintenance</a></li>
+                <li class="nav-item"><button type="button" class="btn btn-outline-light" (click)="logout()">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <h1 class="text-center">Current Appointments</h1>
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered table-primary table-hover w-75">
+                <thead>
+                    <tr>
+                        <th>Appointment made</th>
+                        <th>Scheduled for</th>
+                        <th>Firm</th>
+                        <th>Services</th>
+                        <th>Cancel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of currentAppointments">
+                        <td>{{ appointment.createdAt.split("T")[0] }} {{ appointment.createdAt.split("T")[1].split(":")[0] }}:{{ appointment.createdAt.split("T")[1].split(":")[1] }}</td>
+                        <td>{{ appointment.datetime.split("T")[0] }} {{ appointment.datetime.split("T")[1] }}</td>
+                        <td>{{ firmNames[appointment.firmId - 1] }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let service of appointment.services">
+                                    {{ service.service }} - {{ service.price }}
+                                </li>
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-primary" (click)="cancelAppointment(appointment)">Cancel</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h1 class="text-center">Past Appointments</h1>
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered table-primary table-hover w-75">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Firm</th>
+                        <th>Comment</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of pastAppointments">
+                        <td>{{ appointment.datetime.split("T")[0] }} {{ appointment.datetime.split("T")[1] }}</td>
+                        <td>{{ firmNames[appointment.firmId - 1] }}</td>
+                        <td class="text-center" *ngIf="allComments[appointment.id] == null; else showComment">
+                            <button class="btn btn-primary" [disabled]="appointment.status == 'pending' || appointment.status == 'accepted'" data-bs-toggle="modal" data-bs-target="#leaveComment" (click)="openModal(appointment.id, appointment.firmId)">Comment</button>
+                        </td>
+                        <td class="text-center" *ngIf="allComments[appointment.id] == null; else showGrade">/</td>
+                        <ng-template #showComment>
+                            <td>{{ allComments[appointment.id].comment }}</td>
+                        </ng-template>
+                        <ng-template #showGrade>
+                            <td class="text-center"><span [innerHTML]="getStars(allComments[appointment.id].grade)"></span> ({{ allComments[appointment.id].grade }})</td>
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-3" *ngIf="errorMessage">
+            <div class="alert alert-danger" role="alert">
+                {{ errorMessage }}
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed-bottom bg-primary text-white p-3 mt-auto text-center">
+        <p class="mb-0">&copy; 2024 Garden Imagination</p>
+    </footer>
+</div>
+
+<app-modal
+    modalId="leaveComment"
+    modalTitle="Leave a comment"
+    (saveChanges)="leaveComment(selectedAppointmentId)">
+    <div class="mb-3 d-flex justify-content-center">
+        <textarea name="leaveComment" id="leaveComment" rows="4" cols="50" [(ngModel)]="newComment"></textarea>
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center">
+        <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" (click)="rate(i + 1)">
+            <i [ngClass]="i < newGrade ? 'fas fa-star text-warning' : 'far fa-star text-warning'"></i>
+        </span>
+    </div>
+
+    <p class="text-center">Grade: {{ newGrade }}</p>
+</app-modal>

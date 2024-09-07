@@ -1,0 +1,63 @@
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand">
+                <b>Garden Imagination</b>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="/owner" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="/owner-firms" class="nav-link">Firms</a></li>
+                <li class="nav-item"><a href="/owner-appointments" class="nav-link">Appointments</a></li>
+                <li class="nav-item"><a href="/owner-maintenance" class="nav-link active">Maintenance</a></li>
+                <li class="nav-item"><button type="button" class="btn btn-outline-light" (click)="logout()">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <h1 class="text-center">Finished Jobs</h1>
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered table-primary table-hover w-75">
+                <thead>
+                    <tr>
+                        <th>Finished Date & Time</th>
+                        <th>Water Surface</th>
+                        <th>Servicing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of finishedAppointments">
+                        <td>{{ appointment.finishedDateTime.split("T")[0] }} {{ appointment.finishedDateTime.split("T")[1].split(":")[0] }}:{{ appointment.finishedDateTime.split("T")[1].split(":")[1] }}</td>
+                        <td *ngIf="appointment.poolSquareMeters != 0">{{ appointment.poolSquareMeters }} m<sup>2</sup></td>
+                        <td *ngIf="appointment.fountainSquareMeters != 0">{{ appointment.fountainSquareMeters }} m<sup>2</sup></td>
+                        <td>
+                            <button class="btn btn-primary" [disabled]="!canRequestMaintenance(appointment.finishedDateTime)" (click)="requestMaintentance(appointment)">Request Maintentance</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h1 class="text-center">Maintenance</h1>
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered table-primary table-hover w-75">
+                <thead>
+                    <tr>
+                        <th>Appointment</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of underMaintenanceAppointments">
+                        <td>{{ appointment.id }}</td>
+                        <td>{{ appointment.status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="fixed-bottom bg-primary text-white p-3 mt-auto text-center">
+        <p class="mb-0">&copy; 2024 Garden Imagination</p>
+    </footer>
+</div>

@@ -1,0 +1,29 @@
+{
+    "shapes": [
+        { "type": "pool", "x": 120, "y": 190, "width": 500, "height": 300 },
+        { "type": "greenery", "x": 20, "y": 10, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 20, "y": 110, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 20, "y": 210, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 20, "y": 310, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 20, "y": 410, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 20, "y": 510, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 120, "y": 510, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 220, "y": 510, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 320, "y": 510, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 420, "y": 510, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 520, "y": 510, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 620, "y": 510, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 600, "y": 10, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 700, "y": 10, "width": 80, "height": 80 },
+        { "type": "greenery", "x": 700, "y": 110, "width": 80, "height": 80 },
+        { "type": "table", "x": 250, "y": 100, "radius": 15 },
+        { "type": "deckChair", "x": 270, "y": 90, "width": 20, "height": 40 },
+        { "type": "deckChair", "x": 210, "y": 90, "width": 20, "height": 40 },
+        { "type": "table", "x": 500, "y": 100, "radius": 15 },
+        { "type": "deckChair", "x": 520, "y": 90, "width": 20, "height": 40 },
+        { "type": "deckChair", "x": 460, "y": 90, "width": 20, "height": 40 },
+        { "type": "table", "x": 715, "y": 340, "radius": 15 },
+        { "type": "deckChair", "x": 680, "y": 360, "width": 40, "height": 20 },
+        { "type": "deckChair", "x": 680, "y": 300, "width": 40, "height": 20 }
+    ]
+}

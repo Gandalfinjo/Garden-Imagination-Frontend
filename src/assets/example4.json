@@ -1,0 +1,33 @@
+{
+    "shapes": [
+        { "type": "fountain", "x": 400, "y": 300, "radius": 150 },
+        { "type": "greenery", "x": 15, "y": 15, "width": 120, "height": 120 },
+        { "type": "greenery", "x": 15, "y": 165, "width": 120, "height": 120 },
+        { "type": "greenery", "x": 15, "y": 315, "width": 120, "height": 120 },
+        { "type": "greenery", "x": 15, "y": 465, "width": 120, "height": 120 },
+        { "type": "greenery", "x": 665, "y": 15, "width": 120, "height": 120 },
+        { "type": "greenery", "x": 665, "y": 165, "width": 120, "height": 120 },
+        { "type": "greenery", "x": 665, "y": 315, "width": 120, "height": 120 },
+        { "type": "greenery", "x": 665, "y": 465, "width": 120, "height": 120 },
+        { "type": "table", "x": 250, "y": 100, "radius": 14 },
+        { "type": "deckChair", "x": 270, "y": 90, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 210, "y": 90, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 240, "y": 60, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 240, "y": 120, "width": 20, "height": 20 },
+        { "type": "table", "x": 550, "y": 100, "radius": 14 },
+        { "type": "deckChair", "x": 570, "y": 90, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 510, "y": 90, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 540, "y": 60, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 540, "y": 120, "width": 20, "height": 20 },
+        { "type": "table", "x": 250, "y": 500, "radius": 14 },
+        { "type": "deckChair", "x": 270, "y": 490, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 210, "y": 490, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 240, "y": 460, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 240, "y": 520, "width": 20, "height": 20 },
+        { "type": "table", "x": 550, "y": 500, "radius": 14 },
+        { "type": "deckChair", "x": 570, "y": 490, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 510, "y": 490, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 540, "y": 460, "width": 20, "height": 20 },
+        { "type": "deckChair", "x": 540, "y": 520, "width": 20, "height": 20 }
+    ]
+}

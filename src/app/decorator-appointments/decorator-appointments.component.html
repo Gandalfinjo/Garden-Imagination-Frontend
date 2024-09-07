@@ -1,0 +1,186 @@
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand">
+                <b>Garden Imagination</b>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="/decorator" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="/decorator-appointments" class="nav-link active">Appointments</a></li>
+                <li class="nav-item"><a href="/decorator-maintenance" class="nav-link">Maintenance</a></li>
+                <li class="nav-item"><a href="/decorator-statistics" class="nav-link">Statistics</a></li>
+                <li class="nav-item"><button type="button" class="btn btn-outline-light" (click)="logout()">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <h1 class="text-center">Pending Appointments</h1>
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered table-primary table-hover w-75">
+                <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Scheduled for</th>
+                        <th>Type</th>
+                        <th>Pool</th>
+                        <th>Greenery</th>
+                        <th>Decktables and chairs (m<sup>2</sup>)</th>
+                        <th>Fountain</th>
+                        <th>Tables</th>
+                        <th>Chairs</th>
+                        <th>Description</th>
+                        <th>Services</th>
+                        <th>Responsibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of firmPendingAppointments">
+                        <td>{{ appointment.user }}</td>
+                        <td>{{ appointment.datetime.split("T")[0] }} {{ appointment.datetime.split("T")[1] }}</td>
+                        <td>{{ appointment.type }}</td>
+                        <td>{{ appointment.poolSquareMeters }}</td>
+                        <td>{{ appointment.greenSquareMeters }}</td>
+                        <td>{{ appointment.chillSquareMeters }}</td>
+                        <td>{{ appointment.fountainSquareMeters }}</td>
+                        <td>{{ appointment.tables }}</td>
+                        <td>{{ appointment.chairs }}</td>
+                        <td>{{ appointment.shortDescription }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let service of appointment.services">
+                                    {{ service.service }} - {{ service.price }}
+                                </li>
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-primary" (click)="acceptAppointment(appointment.id)">Accept</button>
+                            <hr>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rejectionComment" (click)="openModal(appointment.id)">Decline</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mb-3" *ngIf="errorMessage">
+            <div class="alert alert-danger" role="alert">
+                {{ errorMessage }}
+            </div>
+        </div>
+
+        <h1 class="text-center">My Appointments</h1>
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered table-primary table-hover w-75">
+                <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Scheduled for</th>
+                        <th>Type</th>
+                        <th>Pool</th>
+                        <th>Greenery</th>
+                        <th>Decktables and chairs (m<sup>2</sup>)</th>
+                        <th>Fountain</th>
+                        <th>Tables</th>
+                        <th>Chairs</th>
+                        <th>Description</th>
+                        <th>Services</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of decoratorAcceptedAppointments">
+                        <td>{{ appointment.user }}</td>
+                        <td>{{ appointment.datetime.split("T")[0] }} {{ appointment.datetime.split("T")[1] }}</td>
+                        <td>{{ appointment.type }}</td>
+                        <td>{{ appointment.poolSquareMeters }}</td>
+                        <td>{{ appointment.greenSquareMeters }}</td>
+                        <td>{{ appointment.chillSquareMeters }}</td>
+                        <td>{{ appointment.fountainSquareMeters }}</td>
+                        <td>{{ appointment.tables }}</td>
+                        <td>{{ appointment.chairs }}</td>
+                        <td>{{ appointment.shortDescription }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let service of appointment.services">
+                                    {{ service.service }} - {{ service.price }}
+                                </li>
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-primary" (click)="finishAppointment(appointment.id)">Finish</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h1 class="text-center">Finished Appointments</h1>
+        <div class="table-responsive d-flex justify-content-center">
+            <table class="table table-striped table-bordered table-primary table-hover w-75">
+                <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Finished At</th>
+                        <th>Type</th>
+                        <th>Pool</th>
+                        <th>Greenery</th>
+                        <th>Decktables and chairs (m<sup>2</sup>)</th>
+                        <th>Fountain</th>
+                        <th>Tables</th>
+                        <th>Chairs</th>
+                        <th>Description</th>
+                        <th>Services</th>
+                        <th>Photo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of decoratorFinishedAppointments">
+                        <td>{{ appointment.user }}</td>
+                        <td>{{ appointment.finishedDateTime.split("T")[0] }} {{ appointment.finishedDateTime.split("T")[1] }}</td>
+                        <td>{{ appointment.type }}</td>
+                        <td>{{ appointment.poolSquareMeters }}</td>
+                        <td>{{ appointment.greenSquareMeters }}</td>
+                        <td>{{ appointment.chillSquareMeters }}</td>
+                        <td>{{ appointment.fountainSquareMeters }}</td>
+                        <td>{{ appointment.tables }}</td>
+                        <td>{{ appointment.chairs }}</td>
+                        <td>{{ appointment.shortDescription }}</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let service of appointment.services">
+                                    {{ service.service }} - {{ service.price }}
+                                </li>
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            <button [disabled]="appointment.photo != ''" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#attachPhotoModal" (click)="openModal(appointment.id)">Attach photo</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class=" bg-primary text-white p-3 mt-auto text-center">
+        <p class="mb-0">&copy; 2024 Garden Imagination</p>
+    </footer>
+</div>
+
+<app-modal
+    modalId="rejectionComment"
+    modalTitle="Why are you declining this appointment?"
+    (saveChanges)="declineAppointment(selectedAppointmentId)">
+    <div class="mb-3">
+        <textarea name="rejectionComment" id="rejectionComment" rows="4" cols="50" [(ngModel)]="rejectionComment"></textarea>
+    </div>
+</app-modal>
+
+<app-modal
+    modalId="attachPhotoModal"
+    modalTitle="Attach a photo of the finished work"
+    (saveChanges)="attachPhoto(selectedAppointmentId)">
+    <div class="mb-3">
+        <label for="attachPhoto" class="col-form-label">Photo:</label>
+        <input type="file" class="form-control" id="attachPhoto" name="attachPhoto" (change)="onFileSelected($event)">
+    </div>
+</app-modal>
